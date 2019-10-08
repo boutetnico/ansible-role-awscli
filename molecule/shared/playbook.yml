@@ -1,0 +1,25 @@
+---
+- name: Converge
+  hosts: all
+
+  pre_tasks:
+    - name: Create test group
+      group:
+        name: test_group
+      become: true
+
+    - name: Create test user
+      user:
+        name: test_user
+        home: /home/test_user
+        createhome: true
+        group: test_group
+      become: true
+
+  roles:
+    - role: ansible-role-awscli
+      awscli_user_home: /home/test_user
+      awscli_user: test_user
+      awscli_group: test_group
+      aws_s3_configuration:
+        - "use_accelerate_endpoint = false"

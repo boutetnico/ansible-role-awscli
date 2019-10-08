@@ -1,0 +1,22 @@
+---
+dependency:
+  name: galaxy
+
+driver:
+  name: docker
+
+lint:
+  name: yamllint
+
+provisioner:
+  name: ansible
+  playbooks:
+    converge: ../shared/playbook.yml
+  lint:
+    name: ansible-lint
+
+verifier:
+  name: testinfra
+  directory: ../shared/tests/
+  lint:
+    name: flake8

@@ -1,0 +1,34 @@
+---
+- name: Install pip
+  package:
+    name: python-pip
+    state: present
+
+- name: Install awscli
+  pip:
+    name: awscli
+    state: present
+
+- name: Create .aws dir
+  file:
+    group: "{{ awscli_group }}"
+    mode: 0755
+    owner: "{{ awscli_user }}"
+    path: "{{ awscli_user_home }}/.aws"
+    state: directory
+
+- name: Create config file
+  template:
+    dest: "{{ awscli_user_home }}/.aws/config"
+    group: "{{ awscli_group }}"
+    mode: 0644
+    owner: "{{ awscli_user }}"
+    src: config.j2
+
+- name: Create credentials file
+  template:
+    dest: "{{ awscli_user_home }}/.aws/credentials"
+    group: "{{ awscli_group }}"
+    mode: 0644
+    owner: "{{ awscli_user }}"
+    src: credentials.j2

@@ -1,0 +1,9 @@
+---
+scenario:
+  name: debian
+
+platforms:
+  - name: ansible-role-awscli-debian-9
+    image: debian:9
+  - name: ansible-role-awscli-debian-10
+    image: debian:10
