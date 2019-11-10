@@ -29,7 +29,7 @@ Role Variables
 | awscli_aws_access_key_id     | false    |                                 | string    |                                               |
 | awscli_aws_secret_access_key | false    |                                 | string    |                                               |
 | awscli_region                | false    |                                 | string    |                                               |
-| aws_s3_configuration         | false    | `[]`                            | list      | S3-specific config. See `defaults/main.yml`   |
+| awscli_s3_configuration      | false    | `[]`                            | list      | S3-specific config. See `defaults/main.yml`   |
 
 Dependencies
 ------------
@@ -47,7 +47,7 @@ Example Playbook
           awscli_group: test_group
           awscli_aws_access_key_id: aaaa
           awscli_aws_secret_access_key: bbbb
-          aws_s3_configuration:
+          awscli_s3_configuration:
             - "use_accelerate_endpoint = false"
 
 

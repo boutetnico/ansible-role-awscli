@@ -12,7 +12,7 @@ awscli_aws_secret_access_key:
 awscli_region:
 
 # S3 configation
-aws_s3_configuration: []
+awscli_s3_configuration: []
 # - "max_concurrent_requests = 10"
 # - "max_queue_size = 10000"
 # - "multipart_threshold = 64MB"
