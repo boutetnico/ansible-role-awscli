@@ -28,12 +28,14 @@ def test_awscli_config_file(host, username, groupname, s3_config):
     assert awscli_config.contains(s3_config)
 
 
-@pytest.mark.parametrize('username,groupname', [
-  ('test_user', 'test_group'),
+@pytest.mark.parametrize('username,groupname,key,secret', [
+  ('test_user', 'test_group', 'aaaa', 'bbbb'),
 ])
-def test_awscli_credentials_file(host, username, groupname):
-    awscli_config = host.file('/home/' + username + '/.aws/credentials')
-    assert awscli_config.exists
-    assert awscli_config.is_file
-    assert awscli_config.user == username
-    assert awscli_config.group == groupname
+def test_awscli_credentials_file(host, username, groupname, key, secret):
+    awscli_credentials = host.file('/home/' + username + '/.aws/credentials')
+    assert awscli_credentials.exists
+    assert awscli_credentials.is_file
+    assert awscli_credentials.user == username
+    assert awscli_credentials.group == groupname
+    assert awscli_credentials.contains(key)
+    assert awscli_credentials.contains(secret)

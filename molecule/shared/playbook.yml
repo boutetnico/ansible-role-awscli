@@ -21,5 +21,7 @@
       awscli_user_home: /home/test_user
       awscli_user: test_user
       awscli_group: test_group
+      awscli_aws_access_key_id: aaaa
+      awscli_aws_secret_access_key: bbbb
       aws_s3_configuration:
         - "use_accelerate_endpoint = false"
