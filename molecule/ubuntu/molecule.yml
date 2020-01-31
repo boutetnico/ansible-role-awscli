@@ -1,9 +1,0 @@
----
-scenario:
-  name: ubuntu
-
-platforms:
-  - name: ansible-role-awscli-ubuntu-1604
-    image: ubuntu:16.04
-  - name: ansible-role-awscli-ubuntu-1804
-    image: ubuntu:18.04
