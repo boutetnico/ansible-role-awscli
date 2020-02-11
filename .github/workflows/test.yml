@@ -26,5 +26,12 @@ jobs:
           python -m pip install --upgrade pip
           pip install -q ansible~=${{ matrix.ansible }} molecule docker
 
+      - name: Display versions
+        run: |
+          python -c "import sys; print(sys.version)"
+          pip --version
+          ansible --version
+          molecule --version
+
       - name: Run Molecule
         run: molecule test
