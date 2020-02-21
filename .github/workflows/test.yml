@@ -24,7 +24,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -q ansible~=${{ matrix.ansible }} molecule docker
+          pip install -q ansible~=${{ matrix.ansible }} ansible-lint docker flake8 molecule testinfra
 
       - name: Display versions
         run: |

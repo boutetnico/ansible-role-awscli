@@ -1,0 +1,17 @@
+---
+- name: Prepare
+  hosts: all
+
+  tasks:
+    - name: Create test group
+      group:
+        name: test_group
+      become: true
+
+    - name: Create test user
+      user:
+        name: test_user
+        home: /home/test_user
+        createhome: true
+        group: test_group
+      become: true

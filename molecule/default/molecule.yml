@@ -1,6 +1,7 @@
 ---
 dependency:
   name: galaxy
+  enabled: False
 
 driver:
   name: docker
@@ -15,15 +16,13 @@ platforms:
   - name: ansible-role-awscli-ubuntu-1804
     image: ubuntu:18.04
 
-lint:
-  name: yamllint
+lint: |
+    yamllint .
+    ansible-lint
+    flake8
 
 provisioner:
   name: ansible
-  lint:
-    name: ansible-lint
 
 verifier:
   name: testinfra
-  lint:
-    name: flake8
