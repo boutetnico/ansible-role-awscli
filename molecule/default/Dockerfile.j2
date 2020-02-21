@@ -6,4 +6,7 @@ FROM {{ item.registry.url }}/{{ item.image }}
 FROM {{ item.image }}
 {% endif %}
 
-RUN apt-get update && apt-get install -y python3 sudo bash ca-certificates && apt-get clean
+ARG testarg=fail
+ENV envarg=$testarg
+
+RUN apt-get update && apt-get install -y python3 sudo bash ca-certificates iproute2 python3-apt aptitude && apt-get clean
