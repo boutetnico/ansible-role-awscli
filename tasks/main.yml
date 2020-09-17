@@ -3,6 +3,7 @@
   package:
     name: python{{ '3' if ansible_python.version.major == 3 else '' }}-pip
     state: present
+    update_cache: true
 
 - name: Install awscli
   pip:
