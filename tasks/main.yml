@@ -1,35 +1,44 @@
 ---
-- name: Install pip
+- name: Ensure pip is installed
   package:
     name: python{{ '3' if ansible_python.version.major == 3 else '' }}-pip
     state: present
     update_cache: true
 
-- name: Install awscli
+- name: Ensure awscli python package is installed
   pip:
     name: awscli
     state: present
 
-- name: Create .aws dir
+- name: Ensure ~/.aws directory exists
   file:
-    group: "{{ awscli_group }}"
+    group: "{{ item.group }}"
     mode: 0755
-    owner: "{{ awscli_user }}"
-    path: "{{ awscli_user_home }}/.aws"
+    owner: "{{ item.name }}"
+    path: "{{ item.home }}/.aws"
     state: directory
+  loop: "{{ awscli_users }}"
+  loop_control:
+    label: "{{ item.name }}"
 
-- name: Create config file
+- name: Ensure ~/.aws/config file exists
   template:
-    dest: "{{ awscli_user_home }}/.aws/config"
-    group: "{{ awscli_group }}"
+    dest: "{{ item.home }}/.aws/config"
+    group: "{{ item.group }}"
     mode: 0644
-    owner: "{{ awscli_user }}"
+    owner: "{{ item.name }}"
     src: config.j2
+  loop: "{{ awscli_users }}"
+  loop_control:
+    label: "{{ item.name }}"
 
-- name: Create credentials file
+- name: Ensure ~/.aws/credentials file exists
   template:
-    dest: "{{ awscli_user_home }}/.aws/credentials"
-    group: "{{ awscli_group }}"
+    dest: "{{ item.home }}/.aws/credentials"
+    group: "{{ item.group }}"
     mode: 0644
-    owner: "{{ awscli_user }}"
+    owner: "{{ item.name }}"
     src: credentials.j2
+  loop: "{{ awscli_users }}"
+  loop_control:
+    label: "{{ item.name }}"
