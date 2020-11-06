@@ -1,8 +1,11 @@
 [default]
-region = {{ awscli_region }}
-{% if awscli_s3_configuration | length > 0 %}
+{% if item.region is defined %}
+region = {{ item.region }}
+{% endif %}
+
+{% if item.s3_configuration | length > 0 %}
 s3 =
-{%   for item in awscli_s3_configuration %}
-  {{ item }}
+{%   for line in item.s3_configuration %}
+  {{ line }}
 {%   endfor %}
 {% endif %}

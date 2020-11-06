@@ -19,15 +19,9 @@ Supported Platforms
 Role Variables
 --------------
 
-| Variable                     | Required | Default                         | Choices   | Comments                                      |
-|------------------------------|----------|---------------------------------|-----------|-----------------------------------------------|
-| awscli_user_home             | yes      | `/root`                         | string    |                                               |
-| awscli_user                  | yes      | `root`                          | string    |                                               |
-| awscli_group                 | yes      | `root`                          | string    |                                               |
-| awscli_aws_access_key_id     | false    |                                 | string    |                                               |
-| awscli_aws_secret_access_key | false    |                                 | string    |                                               |
-| awscli_region                | false    |                                 | string    |                                               |
-| awscli_s3_configuration      | false    | `[]`                            | list      | S3-specific config. See `defaults/main.yml`   |
+| Variable          | Required | Default            | Choices   | Comments                                          |
+|-------------------|----------|--------------------|-----------|---------------------------------------------------|
+| awscli_users      | true     | `[]`               | list      | Main configuration list. See `defaults/main.yml`. |
 
 Dependencies
 ------------
@@ -40,13 +34,14 @@ Example Playbook
     - hosts: all
       roles:
         - role: ansible-role-awscli
-          awscli_user_home: /home/test_user
-          awscli_user: test_user
-          awscli_group: test_group
-          awscli_aws_access_key_id: aaaa
-          awscli_aws_secret_access_key: bbbb
-          awscli_s3_configuration:
-            - "use_accelerate_endpoint = false"
+          awscli_users:
+            - name: test_user
+              group: test_group
+              home: /home/test_user
+              aws_access_key_id: aaaa
+              aws_secret_access_key: bbbb
+              s3_configuration:
+                - "use_accelerate_endpoint = false"
 
 
 Testing
