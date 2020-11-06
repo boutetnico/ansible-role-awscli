@@ -1,9 +1,9 @@
 [default]
-{% if item.region is defined %}
-region = {{ item.region }}
+{% if item.aws_region is defined %}
+region = {{ item.aws_region }}
 {% endif %}
 
-{% if item.s3_configuration | length > 0 %}
+{% if item.s3_configuration | d([]) | length > 0 %}
 s3 =
 {%   for line in item.s3_configuration %}
   {{ line }}
