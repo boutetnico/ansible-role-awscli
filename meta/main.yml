@@ -1,9 +1,10 @@
 ---
 galaxy_info:
+  role_name: awscli
   author: Nicolas Boutet
   description: Install and configure awscli.
   license: MIT
-  min_ansible_version: 2.6
+  min_ansible_version: 2.7
   platforms:
     - name: Ubuntu
       versions:
@@ -16,4 +17,5 @@ galaxy_info:
   galaxy_tags:
     - aws
     - awscli
+    - cli
 dependencies: []

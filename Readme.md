@@ -1,12 +1,15 @@
+[![tests](https://github.com/boutetnico/ansible-role-awscli/workflows/Test%20ansible%20role/badge.svg)](https://github.com/boutetnico/ansible-role-awscli/actions?query=workflow%3A%22Test+ansible+role%22)
+[![Ansible Galaxy](https://img.shields.io/badge/galaxy-boutetnico.awscli-blue.svg)](https://galaxy.ansible.com/boutetnico/awscli)
+
 ansible-role-awscli
 ===================
 
-This role installs and configures AWS Command Line Interface.
+This role installs and configures [AWS Command Line Interface](https://aws.amazon.com/cli/).
 
 Requirements
 ------------
 
-Ansible 2.6 or newer.
+Ansible 2.7 or newer.
 
 Supported Platforms
 -------------------
