@@ -11,15 +11,13 @@ on:
 
 jobs:
   test:
-
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        ansible: ["2.7", "2.8", "2.9", "2.10"]
+        ansible: ["2.9", "2.10"]
 
     steps:
-
       - uses: actions/checkout@v2
 
       - name: Set up Python 3
@@ -27,10 +25,11 @@ jobs:
         with:
           python-version: "3.x"
 
+      - name: Remove pre-installed ansible
+        run: sudo apt-get remove --purge -y ansible
+
       - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -q ansible~=${{ matrix.ansible }} ansible-lint docker flake8 molecule molecule-docker testinfra
+        run: pip install ansible~=${{ matrix.ansible }}.0 ansible-lint docker flake8 molecule molecule-docker pytest-testinfra
 
       - name: Display versions
         run: |

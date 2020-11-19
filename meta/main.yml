@@ -12,9 +12,10 @@ galaxy_info:
         - focal
     - name: Debian
       versions:
-        - stretch
         - buster
+        - stretch
   galaxy_tags:
+    - amazon
     - aws
     - awscli
     - cli
