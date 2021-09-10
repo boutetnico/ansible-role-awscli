@@ -8,7 +8,7 @@
 - name: Ensure awscli python package is installed
   pip:
     name: awscli
-    state: present
+    state: "{{ awscli_package_state }}"
 
 - name: Ensure ~/.aws directory exists
   file:

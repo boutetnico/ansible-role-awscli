@@ -13,3 +13,5 @@ awscli_users:
 #     - "multipart_chunksize = 16MB"
 #     - "use_accelerate_endpoint = false"
 #     - "addressing_style = path"
+
+awscli_package_state: present

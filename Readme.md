@@ -22,9 +22,10 @@ Supported Platforms
 Role Variables
 --------------
 
-| Variable          | Required | Default            | Choices   | Comments                                          |
-|-------------------|----------|--------------------|-----------|---------------------------------------------------|
-| awscli_users      | true     | `[]`               | list      | Main configuration list. See `defaults/main.yml`. |
+| Variable             | Required | Default       | Choices   | Comments                                          |
+|----------------------|----------|---------------|-----------|---------------------------------------------------|
+| awscli_users         | true     | `[]`          | list      | Main configuration list. See `defaults/main.yml`. |
+| awscli_package_state | true     | `present`     | string    | Use `latest` to upgrade.                          |
 
 Dependencies
 ------------
