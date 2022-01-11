@@ -7,10 +7,10 @@ driver:
   name: docker
 
 platforms:
-  - name: ansible-role-awscli-debian-9
-    image: debian:9
   - name: ansible-role-awscli-debian-10
     image: debian:10
+  - name: ansible-role-awscli-debian-11
+    image: debian:11
   - name: ansible-role-awscli-ubuntu-1804
     image: ubuntu:18.04
   - name: ansible-role-awscli-ubuntu-2004
