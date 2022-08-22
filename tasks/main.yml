@@ -1,17 +1,17 @@
 ---
 - name: Ensure pip is installed
-  package:
+  ansible.builtin.package:
     name: python{{ '3' if ansible_python.version.major == 3 else '' }}-pip
     state: present
     update_cache: true
 
 - name: Ensure awscli python package is installed
-  pip:
+  ansible.builtin.pip:
     name: awscli
     state: "{{ awscli_package_state }}"
 
 - name: Ensure ~/.aws directory exists
-  file:
+  ansible.builtin.file:
     group: "{{ item.group }}"
     mode: 0755
     owner: "{{ item.name }}"
@@ -22,7 +22,7 @@
     label: "{{ item.name }}"
 
 - name: Ensure ~/.aws/config file exists
-  template:
+  ansible.builtin.template:
     dest: "{{ item.home }}/.aws/config"
     group: "{{ item.group }}"
     mode: 0644
@@ -33,7 +33,7 @@
     label: "{{ item.name }}"
 
 - name: Ensure ~/.aws/credentials file exists
-  template:
+  ansible.builtin.template:
     dest: "{{ item.home }}/.aws/credentials"
     group: "{{ item.group }}"
     mode: 0644

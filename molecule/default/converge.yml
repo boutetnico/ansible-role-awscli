@@ -3,7 +3,7 @@
   hosts: all
 
   roles:
-    - role: ansible-role-awscli
+    - role: boutetnico.awscli
       awscli_users:
         - name: test_user
           group: test_group
