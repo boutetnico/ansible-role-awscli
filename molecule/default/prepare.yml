@@ -4,12 +4,12 @@
 
   tasks:
     - name: Create test group
-      group:
+      ansible.builtin.group:
         name: test_group
       become: true
 
     - name: Create test user
-      user:
+      ansible.builtin.user:
         name: test_user
         home: /home/test_user
         createhome: true
