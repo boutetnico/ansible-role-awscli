@@ -9,7 +9,7 @@ This role installs and configures [AWS Command Line Interface](https://aws.amazo
 Requirements
 ------------
 
-Ansible 2.7 or newer.
+Ansible 2.10 or newer.
 
 Supported Platforms
 -------------------
