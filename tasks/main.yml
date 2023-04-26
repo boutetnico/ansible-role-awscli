@@ -13,7 +13,7 @@
 - name: Ensure ~/.aws directory exists
   ansible.builtin.file:
     group: "{{ item.group }}"
-    mode: 0755
+    mode: "0755"
     owner: "{{ item.name }}"
     path: "{{ item.home }}/.aws"
     state: directory
@@ -25,7 +25,7 @@
   ansible.builtin.template:
     dest: "{{ item.home }}/.aws/config"
     group: "{{ item.group }}"
-    mode: 0644
+    mode: "0644"
     owner: "{{ item.name }}"
     src: config.j2
   loop: "{{ awscli_users }}"
@@ -36,7 +36,7 @@
   ansible.builtin.template:
     dest: "{{ item.home }}/.aws/credentials"
     group: "{{ item.group }}"
-    mode: 0644
+    mode: "0644"
     owner: "{{ item.name }}"
     src: credentials.j2
   loop: "{{ awscli_users }}"

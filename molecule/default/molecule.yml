@@ -1,7 +1,7 @@
 ---
 dependency:
   name: galaxy
-  enabled: False
+  enabled: false
 
 driver:
   name: docker
@@ -15,11 +15,6 @@ platforms:
     image: ubuntu:20.04
   - name: ansible-role-awscli-ubuntu-2204
     image: ubuntu:22.04
-
-lint: |
-    yamllint .
-    ansible-lint
-    flake8
 
 provisioner:
   name: ansible
