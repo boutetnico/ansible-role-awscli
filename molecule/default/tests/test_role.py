@@ -16,7 +16,7 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
     ],
 )
 def test_awscli_is_installed(host, name):
-    assert host.packages(name).is_installed
+    assert host.package(name).is_installed
 
 
 @pytest.mark.parametrize(
