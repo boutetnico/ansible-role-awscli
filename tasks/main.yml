@@ -1,14 +1,36 @@
 ---
-- name: Ensure pip is installed
-  ansible.builtin.package:
-    name: python{{ '3' if ansible_python.version.major == 3 else '' }}-pip
-    state: present
-    update_cache: true
+- name: Install awscli using pip
+  when: awscli_package_pip_install
+  block:
+    - name: Ensure awscli package is not installed
+      ansible.builtin.package:
+        name: awscli
+        state: absent
 
-- name: Ensure awscli python package is installed
-  ansible.builtin.pip:
-    name: awscli
-    state: "{{ awscli_package_state }}"
+    - name: Ensure pip is installed
+      ansible.builtin.package:
+        name: python{{ '3' if ansible_python.version.major == 3 else '' }}-pip
+        state: present
+        update_cache: true
+
+    - name: Ensure awscli python package is installed
+      ansible.builtin.pip:
+        name: awscli
+        state: "{{ awscli_package_state }}"
+
+- name: Install awscli using apt
+  when: not awscli_package_pip_install
+  block:
+    - name: Ensure awscli python package is not installed
+      ansible.builtin.pip:
+        name: awscli
+        state: absent
+
+    - name: Ensure awscli package is installed
+      ansible.builtin.package:
+        name: awscli
+        state: "{{ awscli_package_state }}"
+        update_cache: true
 
 - name: Ensure ~/.aws directory exists
   ansible.builtin.file:
