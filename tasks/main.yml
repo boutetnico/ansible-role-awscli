@@ -1,41 +1,27 @@
 ---
-- name: Install awscli using pip
-  when: awscli_package_pip_install
-  block:
-    - name: Ensure awscli package is not installed
-      ansible.builtin.package:
-        name: awscli
-        state: absent
+- name: Ensure awscli package is not installed
+  ansible.builtin.package:
+    name: awscli
+    state: absent
 
-    - name: Ensure pip is installed
-      ansible.builtin.package:
-        name: python3-pip
-        state: present
-        update_cache: true
+- name: Ensure pip is installed
+  ansible.builtin.package:
+    name: python3-pip
+    state: present
+    update_cache: true
 
-    - name: Ensure awscli python package is installed
-      ansible.builtin.pip:
-        name: awscli
-        state: "{{ awscli_package_state }}"
+- name: Ensure awscli python package is installed
+  ansible.builtin.pip:
+    name: awscli
+    state: "{{ awscli_package_state }}"
+    extra_args: --break-system-packages
+  when: ansible_distribution_release == 'bookworm'
 
-- name: Install awscli using apt
-  when: not awscli_package_pip_install
-  block:
-    - name: Gather facts about installed packages
-      ansible.builtin.package_facts:
-        manager: auto
-
-    - name: Ensure awscli python package is not installed if pip is installed
-      ansible.builtin.pip:
-        name: awscli
-        state: absent
-      when: "'python3-pip' in ansible_facts.packages"
-
-    - name: Ensure awscli package is installed
-      ansible.builtin.package:
-        name: awscli
-        state: "{{ awscli_package_state }}"
-        update_cache: true
+- name: Ensure awscli python package is installed
+  ansible.builtin.pip:
+    name: awscli
+    state: "{{ awscli_package_state }}"
+  when: ansible_distribution_release != 'bookworm'
 
 - name: Ensure ~/.aws directory exists
   ansible.builtin.file:

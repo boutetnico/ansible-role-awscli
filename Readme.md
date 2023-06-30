@@ -25,7 +25,6 @@ Role Variables
 | Variable                   | Required | Default       | Choices   | Comments                                          |
 |----------------------------|----------|---------------|-----------|---------------------------------------------------|
 | awscli_users               | true     | `[]`          | list      | Main configuration list. See `defaults/main.yml`. |
-| awscli_package_pip_install | true     | `false`       | bool      | Use `true` to install `awscli` using pip.         |
 | awscli_package_state       | true     | `present`     | string    | Use `latest` to upgrade.                          |
 
 Dependencies

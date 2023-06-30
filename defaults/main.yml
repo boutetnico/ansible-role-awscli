@@ -14,5 +14,4 @@ awscli_users:
 #     - "use_accelerate_endpoint = false"
 #     - "addressing_style = path"
 
-awscli_package_pip_install: false
 awscli_package_state: present
