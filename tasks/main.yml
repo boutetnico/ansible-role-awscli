@@ -15,13 +15,13 @@
     name: awscli
     state: "{{ awscli_package_state }}"
     extra_args: --break-system-packages
-  when: ansible_distribution_release == 'bookworm'
+  when: ansible_distribution_release in ['bookworm', 'noble']
 
 - name: Ensure awscli python package is installed
   ansible.builtin.pip:
     name: awscli
     state: "{{ awscli_package_state }}"
-  when: ansible_distribution_release != 'bookworm'
+  when: not ansible_distribution_release in ['bookworm', 'noble']
 
 - name: Ensure ~/.aws directory exists
   ansible.builtin.file:
