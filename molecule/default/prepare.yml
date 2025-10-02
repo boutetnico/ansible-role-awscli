@@ -12,6 +12,6 @@
       ansible.builtin.user:
         name: test_user
         home: /home/test_user
-        createhome: true
+        create_home: true
         group: test_group
       become: true
