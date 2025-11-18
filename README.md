@@ -35,17 +35,20 @@ None
 Example Playbook
 ----------------
 
-    - hosts: all
-      roles:
-        - role: ansible-role-awscli
-          awscli_users:
-            - name: test_user
-              group: test_group
-              home: /home/test_user
-              aws_access_key_id: aaaa
-              aws_secret_access_key: bbbb
-              s3_configuration:
-                - "use_accelerate_endpoint = false"
+```yaml
+- hosts: all
+  roles:
+    - role: ansible-role-awscli
+      awscli_users:
+        - name: test_user
+          group: test_group
+          home: /home/test_user
+          aws_access_key_id: aaaa...
+          aws_secret_access_key: bbbb...
+          aws_region: us-east-1
+          s3_configuration:
+            - "use_accelerate_endpoint = false"
+```
 
 
 Testing
