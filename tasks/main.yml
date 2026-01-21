@@ -48,3 +48,4 @@
   loop: "{{ awscli_users }}"
   loop_control:
     label: "{{ item.name }}"
+  no_log: true
