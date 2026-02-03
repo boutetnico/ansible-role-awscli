@@ -1,6 +1,15 @@
 ---
 - name: Converge
   hosts: all
+  pre_tasks:
+    - name: Create test users
+      ansible.builtin.user:
+        name: "{{ item.name }}"
+        group: "{{ item.group }}"
+        create_home: true
+      loop:
+        - {name: test_user, group: test_group}
+        - {name: test_user2, group: test_group}
 
   roles:
     - role: boutetnico.awscli
@@ -12,3 +21,8 @@
           aws_secret_access_key: bbbb
           s3_configuration:
             - "use_accelerate_endpoint = false"
+        - name: test_user2
+          group: test_group
+          home: /home/test_user2
+          aws_access_key_id: cccc
+          aws_secret_access_key: dddd
