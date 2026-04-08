@@ -16,7 +16,7 @@
   block:
     - name: Determine architecture
       ansible.builtin.set_fact:
-        _awscli_arch: "{{ 'aarch64' if ansible_architecture == 'aarch64' else 'x86_64' }}"
+        _awscli_arch: "{{ 'aarch64' if ansible_facts['architecture'] == 'aarch64' else 'x86_64' }}"
 
     - name: Download aws cli v2
       ansible.builtin.unarchive:
