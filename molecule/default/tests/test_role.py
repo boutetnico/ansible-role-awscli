@@ -1,32 +1,10 @@
 import pytest
 
 
-@pytest.mark.parametrize(
-    "package",
-    [
-        "python3-pip",
-    ],
-)
-def test_dependencies_installed(host, package):
-    pkg = host.package(package)
-    assert pkg.is_installed
-
-
-@pytest.mark.parametrize(
-    "name",
-    [
-        ("awscli"),
-    ],
-)
-def test_awscli_is_installed(host, name):
-    packages = host.pip.get_packages(pip_path="pip3")
-    assert name in packages
-
-
-def test_awscli_command_works(host):
-    cmd = host.run("aws --version")
+def test_awscli_is_installed(host):
+    cmd = host.run("/usr/local/bin/aws --version")
     assert cmd.rc == 0
-    assert "aws-cli" in cmd.stdout or "aws-cli" in cmd.stderr
+    assert "aws-cli/2" in cmd.stdout or "aws-cli/2" in cmd.stderr
 
 
 @pytest.mark.parametrize(
