@@ -4,7 +4,7 @@
 ansible-role-awscli
 ===================
 
-This role installs and configures [AWS Command Line Interface](https://aws.amazon.com/cli/).
+This role installs and configures [AWS Command Line Interface v2](https://aws.amazon.com/cli/) using the [official AWS installer](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
 
 Requirements
 ------------

@@ -1,20 +1,37 @@
 ---
-- name: Ensure awscli package is not installed
+- name: Ensure unzip is installed
   ansible.builtin.package:
-    name: awscli
-    state: absent
-
-- name: Ensure pip is installed
-  ansible.builtin.package:
-    name: python3-pip
+    name: unzip
     state: present
     update_cache: true
 
-- name: Ensure awscli python package is installed
-  ansible.builtin.pip:
-    break_system_packages: true
-    name: awscli
-    state: "{{ awscli_package_state }}"
+- name: Check if aws cli is installed
+  ansible.builtin.command: /usr/local/bin/aws --version
+  register: _awscli_version
+  changed_when: false
+  failed_when: false
+
+- name: Download and install aws cli v2
+  when: _awscli_version.rc != 0 or awscli_package_state == 'latest'
+  block:
+    - name: Determine architecture
+      ansible.builtin.set_fact:
+        _awscli_arch: "{{ 'aarch64' if ansible_architecture == 'aarch64' else 'x86_64' }}"
+
+    - name: Download aws cli v2
+      ansible.builtin.unarchive:
+        src: "https://awscli.amazonaws.com/awscli-exe-linux-{{ _awscli_arch }}.zip"
+        dest: /tmp
+        remote_src: true
+
+    - name: Install aws cli v2
+      ansible.builtin.command: /tmp/aws/install --update
+      changed_when: true
+
+    - name: Remove installer files
+      ansible.builtin.file:
+        path: /tmp/aws
+        state: absent
 
 - name: Ensure ~/.aws directory exists
   ansible.builtin.file:
